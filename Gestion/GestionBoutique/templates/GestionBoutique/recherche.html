@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% block title %}Recherche de Produits{% endblock %}
+    
+    {% block content %}
+    <h1>Recherche de Produits</h1>
+    <form method="GET" action="{% url 'rechercher_vente' %}">
+        <input type="text" name="q" placeholder="Rechercher une vente..." value="{{ query }}">
+        <button type="submit">Rechercher</button>
+    </form>
+    
+    {% if produits %}
+        <h2>Résultats de la recherche :</h2>
+        <ul>
+            {% for produit in produits %}
+                <li>{{ produit.nom }} - {{ produit.prix }} FCFA</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun produit trouvé.</p>
+    {% endif %}
+    {% endblock %}   
+    <li><a href="{% url 'liste_ventes' %}">Ventes</a></li> 
+
+</body>
+</html>

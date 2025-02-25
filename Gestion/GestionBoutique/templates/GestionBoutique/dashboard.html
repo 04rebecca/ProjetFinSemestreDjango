@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Tableau de Bord</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5; /* Couleur de fond */
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            padding: 20px;
+        }
+        .sidebar a {
+            color: white;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #495057; /* Couleur au survol */
+        }
+        .main-content {
+            margin-left: 250px; /* Ajuster selon la largeur de la sidebar */
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card-title {
+            font-size: 1.5rem;
+        }
+        .bg-income {
+            background-color: #28a745; /* Vert */
+            color: white;
+        }
+        .bg-expense {
+            background-color: #dc3545; /* Rouge */
+            color: white;
+        }
+        .bg-total {
+            background-color: #007bff; /* Bleu */
+            color: white;
+        }
+        .bg-pageviews {
+            background-color: #ffc107; /* Jaune */
+            color: black;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white; /* Fond de la table */
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa; /* Couleur d'en-tête */
+        }
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <div class="sidebar">
+            <h2 class="text-white">Maman Eloha</h2>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accueil' %}">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'liste_produits' %}">Produits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'liste_ventes' %}">Ventes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'liste_transactions' %}">Service_Transactions</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <h1>Tableau de Bord</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card bg-income">
+                        <div class="card-body">
+                            <h5 class="card-title">Revenu</h5>
+                            <p class="card-text" id="income">{{ montant_total_ventes }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-expense">
+                        <div class="card-body">
+                            <h5 class="card-title">Dépenses</h5>
+                            <p class="card-text" id="expense">{{ montant_total_transactions }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-total">
+                        <div class="card-body">
+                            <h5 class="card-title">Total</h5>
+                            <p class="card-text" id="total">{{ total_quantite_stock }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Statistiques Générales</h2>
+            <p>Total Produits : {{ total_produits }}</p>
+            <p>Quantité Totale en Stock : {{ total_quantite_stock }}</p>
+
+            <h2>Statistiques des Ventes</h2>
+            <p>Total Ventes : {{ total_ventes }}</p>
+            <p>Montant Total des Ventes : {{ montant_total_ventes }} FCFA</p>
+
+            <h2>Statistiques des Transactions</h2>
+            <p>Total Transactions : {{ total_transactions }}</p>
+            <p>Montant Total des Transactions : {{ montant_total_transactions }} FCFA</p>
+
+            <h2>Niveaux de Stocks des Produits</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Catégorie</th>
+                        <th>Prix</th>
+                        <th>Quantité en Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.nom }}</td>
+                        <td>{{ produit.categorie.nom }}</td>
+                        <td>{{ produit.prix }} FCFA</td>
+                        <td>{{ produit.quantite }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

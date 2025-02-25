@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Transactions</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/doc.min.css' %}">
+    
+    <style>
+        header {
+            background-color:rgb(13, 253, 69); /* Couleur de fond de l'en-tête */
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0 20px;
+            position: relative;
+        }
+
+        nav li::after {
+            content: '';
+            display: block;
+            height: 4px; /* Hauteur de la bande */
+            background-color: orange; /* Couleur de la bande */
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -5px; /* Position de la bande sous le texte */
+            opacity: 0; /* Initialement invisible */
+            transition: opacity 0.3s;
+        }
+
+        nav li:hover::after {
+            opacity: 1; /* Affiche la bande au survol */
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }    header {
+            background-color:rgb(253, 157, 13); /* Couleur de fond de l'en-tête */
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0 20px;
+            position: relative;
+        }
+
+        nav li::after {
+            content: '';
+            display: block;
+            height: 4px; /* Hauteur de la bande */
+            background-color: orange; /* Couleur de la bande */
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -5px; /* Position de la bande sous le texte */
+            opacity: 0; /* Initialement invisible */
+            transition: opacity 0.3s;
+        }
+
+        nav li:hover::after {
+            opacity: 1; /* Affiche la bande au survol */
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+
+            background-color: #47f26c;
+            color: white;
+        }
+        .GestionBoutique {
+            margin-top: 10px;
+            background: #e9ecef;
+            padding: 10px;
+            border-left: 4px solid #5bc0de;
+        }
+        .btn-recherche:hover {
+            background-color: #0056b3;  /* Couleur au survol */
+        }
+
+        /* Style des boutons d'ajout de produit */
+        .btn-ajouter-transaction {
+            padding: 10px 15px;
+            background-color: #28a745;  /* Couleur de fond verte */
+            color: white;                /* Couleur du texte */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        /* Changement de couleur au survol pour le bouton d'ajout */
+        .btn-ajouter-transaction:hover {
+            background-color: #218838;  /* Couleur au survol */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue dans le Service_Transaction</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'liste_transactions' %}">Service_Transaction</a></li>
+                <li><a href="{% url 'liste_produits' %}">Produits</a></li>
+                <li><a href="{% url 'liste_ventes' %}">Ventes</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Liste des Transactions</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Service</th>
+                    <th>Montant</th>
+                    <th>Type de transaction</th>
+                    <th>Date de transaction</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.service }}</td>
+                    <td>{{ transaction.montant }}</td>
+                    <td>{{ transaction.type_transaction }}</td>
+                    <td>{{ transaction.date_transaction }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">Aucune transaction enregistré.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button><a href="{% url 'ajouter_transaction' %}">Ajouter une transaction</a></button>
+    </div>
+</body>
+</html>
