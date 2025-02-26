@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import accueil, liste_produits, liste_ventes, ajouter_produit, ajouter_vente, dashboard, rechercher_vente, liste_transactions, ajouter_transaction, gestion_categories, modifier_produit, supprimer_produit, modifier_vente, supprimer_vente, modifier_transaction, supprimer_transaction
+from .views import accueil, liste_produits, liste_ventes, ajouter_produit, ajouter_vente, dashboard, rechercher_vente, liste_transactions, ajouter_transaction, gestion_categories, modifier_produit, supprimer_produit, modifier_vente, supprimer_vente, modifier_transaction, supprimer_transaction, modifier_categorie, supprimer_categorie
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -18,11 +18,13 @@ urlpatterns = [
     path('transations/', liste_transactions, name='liste_transactions'),
     path('transactions/ajouter/', ajouter_transaction, name='ajouter_transaction'),
     path('categories/', gestion_categories, name='gestion_categories'),
-    path('produits/modifier/', modifier_produit, name='modifier_produit'),
-    path('produits/supprimer/', supprimer_produit, name='supprimer_produit'),
-    path('ventes/modifier/', modifier_vente, name='modifier_vente'),
-    path('ventes/supprimer/', supprimer_vente, name='supprimer_vente'),
-    path('transactions/modifier/', modifier_transaction, name='modifier_transaction'),
-    path('transactions/supprimer/', supprimer_transaction, name='supprimer_transaction'),
+    path('produits/modifier/<int:id>/', modifier_produit, name='modifier_produit'),
+    path('produits/supprimer/<int:id>/', supprimer_produit, name='supprimer_produit'),
+    path('ventes/modifier/<int:id>/', modifier_vente, name='modifier_vente'),
+    path('ventes/supprimer/<int:id>/', supprimer_vente, name='supprimer_vente'),
+    path('transactions/modifier/<int:id>/', modifier_transaction, name='modifier_transaction'),
+    path('transactions/supprimer/<int:id>/', supprimer_transaction, name='supprimer_transaction'),
+    path('categories/modifier/<int:id>/', modifier_categorie, name='modifier_categorie'),
+    path('categories/supprimer/<int:id>/', supprimer_categorie, name='supprimer_categorie'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

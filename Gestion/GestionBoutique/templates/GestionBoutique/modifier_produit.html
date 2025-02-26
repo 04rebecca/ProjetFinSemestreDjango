@@ -10,7 +10,6 @@
         {% csrf_token %}
         {{ form.as_p }}  <!-- Affiche le formulaire -->
         <button type="submit" class="btn btn-primary"href="{% url 'liste_produits' %}">Modifier</button>
-        <button type="submit" class="btn-primary" href="{% url 'liste_transactions' %}">Annuler</button>
     </form>
 </body>
 </html>

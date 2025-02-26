@@ -142,3 +142,25 @@ def supprimer_transaction(request, id):
         return redirect('liste_transactions')
     
     return render(request, 'GestionBoutique/supprimer_transaction.html', {'objet': transaction})
+
+def modifier_categorie(request, id):
+    categorie = get_object_or_404(Categorie, id=id)
+    
+    if request.method == 'POST':
+        form = CategorieForm(request.POST, instance=categorie)
+        if form.is_valid():
+            form.save()
+            return redirect('gestion_categories')  # Redirigez vers la liste des catégories ou une autre vue
+    else:
+        form = CategorieForm(instance=categorie)
+    
+    return render(request, 'GestionBoutique/modifier_categorie.html', {'form': form})
+
+def supprimer_categorie(request, id):
+    categorie = get_object_or_404(Categorie, id=id)
+    
+    if request.method == 'POST':
+        categorie.delete()
+        return redirect('gestion_categories')  # Redirigez vers la liste des catégories
+
+    return render(request, 'GestionBoutique/supprimer_categorie.html', {'categorie': categorie})

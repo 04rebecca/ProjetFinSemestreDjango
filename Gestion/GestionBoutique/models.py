@@ -13,7 +13,6 @@ class Categorie(models.Model):
             return self.default_image.url
         return '/media/default_images/default_image.png'  # Image par défaut générique si aucune image n'est spécifiée
 
-    
     @staticmethod
     def get_default_Categorie():
         return Categorie.objects.first()

@@ -113,7 +113,7 @@
         }
 
         /* Style des boutons d'ajout de produit */
-        .btn-ajouter-vente {
+        .btn-success {
             padding: 10px 15px;
             background-color: #28a745;  /* Couleur de fond verte */
             color: white;                /* Couleur du texte */
@@ -125,8 +125,37 @@
         }
 
         /* Changement de couleur au survol pour le bouton d'ajout */
-        .btn-ajouter-vente:hover {
+        .btn-success:hover {
             background-color: #218838;  /* Couleur au survol */
+        }
+        /* Styles pour les boutons */
+        .btn {
+            padding: 10px 15px; /* Espacement interne */
+            border: none; /* Supprime la bordure par défaut */
+            border-radius: 5px; /* Coins arrondis */
+            cursor: pointer; /* Curseur pointeur au survol */
+            font-weight: bold; /* Texte en gras */
+            transition: background-color 0.3s, color 0.3s; /* Transition douce */
+        }
+
+        /* Style pour le bouton Modifier */
+        .btn-warning {
+        background-color: #ffcc00; /* Couleur de fond */
+        color: white; /* Couleur du texte */
+        }
+
+        .btn-warning:hover {
+            background-color: #e6b800; /* Couleur au survol */
+        }
+
+        /* Style pour le bouton Supprimer */
+        .btn-danger {
+            background-color: #ff4d4d; /* Couleur de fond */
+            color: white; /* Couleur du texte */
+        }
+
+        .btn-danger:hover {
+            background-color: #e60000; /* Couleur au survol */
         }
     </style>
 </head>
@@ -136,6 +165,7 @@
         <nav>
             <ul>
                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'gestion_categories' %}">Catégories</a>
                 <li><a href="{% url 'liste_transactions' %}">Service_transactions</a></li>
                 <li><a href="{% url 'liste_produits' %}">Produits</a></li>
                 <li><a href="{% url 'liste_ventes' %}">Ventes</a></li>
@@ -168,8 +198,8 @@
                     <td>{{ vente.total }}</td>
                     <td>{{ vente.date }}</td>
                     <td>
-                        <a type="button" class="btn btn-warning" href="{% url 'modifier_vente' %}">Modifier</a>
-                        <a type="button" class="btn btn-danger" href="{% url 'supprimer_vente' %}">supprimer</a>
+                        <a type="button" class="btn btn-warning" href="{% url 'modifier_vente' vente.id %}">Modifier</a>
+                        <a type="button" class="btn btn-danger" href="{% url 'supprimer_vente' vente.id %}">supprimer</a>
                     </td>
                 </tr>
                 {% empty %}
@@ -179,7 +209,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <button><a type="submit" href="{% url 'ajouter_vente' %}">Ajouter une vente</a></button>
+        <a type="button" class="btn btn-success" href="{% url 'ajouter_vente' %}">Ajouter une vente</a>
     </div>
 </body>
 </html>
