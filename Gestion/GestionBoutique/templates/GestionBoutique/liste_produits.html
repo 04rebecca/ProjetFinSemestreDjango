@@ -151,7 +151,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Nom</th>
+                    <th>Categorie</th>
                     <th>Prix</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -159,7 +161,12 @@
                 <tr>
                     <td>{{ produit.id }}</td>
                     <td>{{ produit.nom }}</td>
+                    <td>{{produit.categorie}}</td>
                     <td>{{ produit.prix }}</td>
+                    <td>
+                        <a type="button" class="btn btn-warning" href="{% url 'modifier_produit' %}">Modifier</a>
+                        <a type="button" class="btn btn-danger" href="{% url 'supprimer_produit' %}">supprimer</a>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>
@@ -168,7 +175,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <button><a href="{% url 'ajouter_produit' %}">Ajouter une produit</a></button>
+        <button><a type="button" class="btn btn-success" href="{% url 'ajouter_produit' %}">Ajouter une produit</a></button>
     </div>
 </body>
 </html>

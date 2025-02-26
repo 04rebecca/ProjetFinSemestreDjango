@@ -156,6 +156,7 @@
                     <th>Quantité</th>
                     <th>Total</th>
                     <th>Date</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -166,6 +167,10 @@
                     <td>{{ vente.quantite_vendue }}</td>
                     <td>{{ vente.total }}</td>
                     <td>{{ vente.date }}</td>
+                    <td>
+                        <a type="button" class="btn btn-warning" href="{% url 'modifier_vente' %}">Modifier</a>
+                        <a type="button" class="btn btn-danger" href="{% url 'supprimer_vente' %}">supprimer</a>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>

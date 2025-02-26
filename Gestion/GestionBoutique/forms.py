@@ -1,6 +1,6 @@
 from django import forms
 from django.shortcuts import render
-from .models import Produit, Vente, Transaction
+from .models import Produit, Vente, Transaction, Categorie
 from django.db.models import Sum
 
 def tableau_de_bord(request):
@@ -29,6 +29,15 @@ def tableau_de_bord(request):
         'produits': produits,
     }
     return render(request, 'GestionBoutique/dashboard.html', context)
+
+class CategorieForm(forms.ModelForm):
+    class Meta:
+        model = Categorie
+        fields = ['nom', 'image']  # Ajoutez 'image' ici
+        widgets = {
+            'nom': forms.TextInput(attrs={'placeholder': 'Nom de la catégorie', 'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'}),  # Style du champ d'image
+        }
 
 class ProduitForm(forms.ModelForm):
     class Meta:

@@ -155,6 +155,7 @@
                     <th>Montant</th>
                     <th>Type de transaction</th>
                     <th>Date de transaction</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -165,6 +166,10 @@
                     <td>{{ transaction.montant }}</td>
                     <td>{{ transaction.type_transaction }}</td>
                     <td>{{ transaction.date_transaction }}</td>
+                    <td>
+                        <a type="button" class="btn btn-warning" href="{% url 'modifier_transaction' %}">Modifier</a>
+                        <a type="button" class="btn btn-danger" href="{% url 'supprimer_transaction' %}">supprimer</a>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>

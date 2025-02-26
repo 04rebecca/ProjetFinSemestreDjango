@@ -3,9 +3,16 @@ from django.db import models
 # Create your models here.
 class Categorie(models.Model):
     nom = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='categories/', blank=True, null=True)  # Image de la catégorie
+    default_image = models.ImageField(upload_to='default_images/', blank=True, null=True)  # Image par défaut
 
-    def __str__(self):
-        return self.nom
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        if self.default_image:
+            return self.default_image.url
+        return '/media/default_images/default_image.png'  # Image par défaut générique si aucune image n'est spécifiée
+
     
     @staticmethod
     def get_default_Categorie():
